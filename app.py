@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
 import re
 from konlpy.tag import Okt
-import xgboost as xgb
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
@@ -36,12 +34,8 @@ def check_website_safety(url, feature_words, threshold):
     else:
         return "이 사이트는 안전한 사이트입니다."
 
-# Feature 단어 로드
+# Feature 단어
 feature_words = ['리그', '분석', '커뮤니티', '비시', '폴리스', '사이트', '도메인', '사다리', '한자리', '욕구', '연습', '슬롯', '농구', '스코어', '체코', '보증금', '메라', '코드', '프리미어', '곰탕', '막대', '폴더', '아메리카', '놀이터', '티비', '쪽지', '필독', '슈퍼마리오', '라인업', '저희', '봇', '비너스', '기수', '로투스', '스리', '키노', '보타', '리저', '노리', '페셔널', '럭비', '이부', '퀄리티', '파워볼', '비지니스', '리뷰']
-
-# 학습된 XGBoost 모델 로드
-model = xgb.Booster()
-model.load_model('xmodel.model')
 
 @app.route('/')
 def index():
@@ -58,4 +52,5 @@ def classify():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
